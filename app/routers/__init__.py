@@ -1,0 +1,1 @@
+# This file can be empty - we'll import the routers directly in main.py
