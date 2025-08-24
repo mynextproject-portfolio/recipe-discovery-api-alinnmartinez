@@ -1,8 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 from main import app
-from app.dependencies import get_recipe_repository, reset_recipe_repository
-from app.repositories.recipe_repository import MemoryRecipeRepository
+from app.dependencies import get_recipe_repository
+from app.repositories.test_sqlite_repository import InMemorySQLiteRecipeRepository
 
 # Test data for creating recipes
 sample_recipe = {
@@ -28,8 +28,8 @@ updated_recipe = {
 @pytest.fixture
 def client():
     """Create a test client with dependency override"""
-    # Create a shared test repository instance
-    test_repository = MemoryRecipeRepository()
+    # Create a shared test repository instance (in-memory SQLite)
+    test_repository = InMemorySQLiteRecipeRepository()
     
     # Override the dependency to use the same repository for all operations
     def get_test_repository():
